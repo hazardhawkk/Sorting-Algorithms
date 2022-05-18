@@ -10,7 +10,7 @@ namespace Sorting_Algorithms
 
             
 
-            BubbleSort(arrOfIntegers);
+            InsertionSort(arrOfIntegers);
 
 
 
@@ -43,8 +43,7 @@ namespace Sorting_Algorithms
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
                     }
-                    
-
+                 
                   }
 
                 }
@@ -109,6 +108,39 @@ namespace Sorting_Algorithms
                   }
                   i++; 
             }
+            Console.WriteLine("Sorted Array:");       //writing sorted
+            WriteArray(arr); 
+        }
+        
+        static void InsertionSort(int[] arr)
+        {
+            Console.WriteLine("Unsorted Array:");       //writing unsorted
+            WriteArray(arr);                    
+            Console.WriteLine();
+
+
+
+            
+
+            for (int i = 1; i < arr.Length-1; i++)          //itterating through arr starting at second item (index 1)
+			{
+                int currentItem=i;    //<-- variable created to not lose the value of current item
+              int previousIndex = i-1;
+
+                while (arr[previousIndex] > arr[currentItem])  //iterating through inserting each item in correct place
+                {
+                    arr[previousIndex+1] = arr[previousIndex];
+
+                    previousIndex = previousIndex-1;
+                }
+                arr[previousIndex+1] = arr[currentItem];        //+1 bc we have checked one behind the correct position
+	
+			}
+
+
+
+
+
             Console.WriteLine("Sorted Array:");       //writing sorted
             WriteArray(arr); 
         }
