@@ -11,7 +11,7 @@ namespace Sorting_Algorithms
 
             WriteArray(InsertionSortReturnArray(arrOfIntegers));
             
-            Console.WriteLine(BinarySearch(InsertionSortReturnArray(arrOfIntegers), 7, 10));
+            Console.WriteLine(BinarySearch(InsertionSortReturnArray(arrOfIntegers), 4, 10));
 
 
 
@@ -204,13 +204,13 @@ namespace Sorting_Algorithms
         static bool BinarySearch(int[] arr, int target, int arrEnd, int arrStart=0)
         {
             int arrLength = arrEnd - arrStart;
-            int midIndex = arrLength / 2;
-            int mid = arr[midIndex + arrStart]; //+arrStart is neccessary to take into consideration, the ignored length of the array before whereever we are starting 
+            int midIndex = (arrLength / 2) + arrStart;    //+arrStart is neccessary to take into consideration, the ignored length of the array before whereever we are starting
+            int mid = arr[midIndex]; 
 
             if (mid!=target && arrLength==0) { return false; }
             else if (mid == target) { return true; }
             else if (mid > target) { return BinarySearch(arr, target, midIndex-1); }
-            else{ return BinarySearch(arr, target, midIndex+1, arrEnd); } //if mid < target
+            else{ return BinarySearch(arr, target, arrEnd, midIndex + 1); } //if mid < target
 
         }
 
