@@ -7,9 +7,13 @@ namespace Sorting_Algorithms
         static void Main(string[] args)
         {
             int[] arrOfIntegers = {2,8,4,1,8,3,2,63,7,2,5};
-            
+           
 
-            BinarySearch(arrOfIntegers, 5, arrOfIntegers.Length-1);
+            WriteArray(InsertionSortReturnArray(arrOfIntegers));
+            
+            Console.WriteLine(BinarySearch(InsertionSortReturnArray(arrOfIntegers), 7, 10));
+
+
 
         }
         //helper functions:
@@ -158,6 +162,30 @@ namespace Sorting_Algorithms
             WriteArray(arr); 
         }
 
+        static int[] InsertionSortReturnArray(int[] arr)
+        {
+            int currentItem = 0;
+            int previousIndex = 0;
+
+
+
+            for (int i = 1; i < arr.Length; i++)          //itterating through arr starting at second item (index 1)
+            {
+                currentItem = arr[i];    //<-- variable created to not lose the value of current item
+                previousIndex = i - 1;
+
+                while (previousIndex >= 0 && arr[previousIndex] > currentItem)  //iterating through inserting each previous item in correct place by moving it up the array
+                {
+                    arr[previousIndex + 1] = arr[previousIndex];
+
+                    previousIndex = previousIndex - 1;
+                }
+                arr[previousIndex + 1] = currentItem;        //+1 bc we have checked one behind the correct position
+
+            }
+            return arr;
+        }
+
         static bool LinearSearch(int[] arr, int target)
         {
             bool result = false;
@@ -177,13 +205,15 @@ namespace Sorting_Algorithms
         {
             int arrLength = arrEnd - arrStart;
             int midIndex = arrLength / 2;
-            int mid = arr[midIndex];
-            
-            if(mid!=target && arrLength==0) { return false; }
+            int mid = arr[midIndex + arrStart]; //+arrStart is neccessary to take into consideration, the ignored length of the array before whereever we are starting 
+
+            if (mid!=target && arrLength==0) { return false; }
             else if (mid == target) { return true; }
             else if (mid > target) { return BinarySearch(arr, target, midIndex-1); }
             else{ return BinarySearch(arr, target, midIndex+1, arrEnd); } //if mid < target
 
         }
-    }
+
+       
+    }   
 }
